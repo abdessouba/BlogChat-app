@@ -3,27 +3,26 @@ import React, { useState } from "react";
 import Link from "next/link";
 import AnimationWrapper from "../AnimationWrapper";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const result = await signIn("credentials", {
         email,
         password,
-        redirect: false,
+        redirect: true,
+        callbackUrl: "/"
       });
       if (result.error) {
-        console.log(error);
+        console.log(result.error);
       }
-      router.replace("dash");
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   };
-
   return (
     <AnimationWrapper>
       <section className="py-10">

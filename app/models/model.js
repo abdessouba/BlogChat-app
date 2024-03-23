@@ -1,23 +1,49 @@
 import mongoose, { Schema, models } from "mongoose";
 
-const userSchema = new Schema({
+const followSchema = new Schema(
+  {
+    follower: { type: mongoose.Schema.Types.ObjectId },
+  },
+  { timestamps: true }
+);
+
+const userSchema = new Schema(
+  {
     name: {
-        String: true,
-        required:true
+      type: String,
+      required: true,
     },
-    name: {
-        type: String,
-        required:true
+    username: {
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required:true
+      type: String,
+      required: true,
+    },
+    bio: {
+      type: String,
     },
     password: {
-        type: String,
-        required:true
+      type: String,
+      required: true,
     },
-}, {timestamps:true})
+    avatar: {
+      type: String,
+    },
+    posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+    followers: [followSchema],
+    github: {type: String},
+    website: {type: String},
+  },
+  { timestamps: true }
+);
 
-const User = models.User || mongoose.model("User", userSchema)
+const User = models.User || mongoose.model("User", userSchema);
 export default User;

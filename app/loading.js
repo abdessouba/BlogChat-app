@@ -1,9 +1,11 @@
+
+
 import React from "react";
 
 const loading = () => {
   return (
     <div>
-      <div role="status">
+      <div role="status" className="text-center">
         <svg
           aria-hidden="true"
           class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"

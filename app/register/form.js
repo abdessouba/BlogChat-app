@@ -1,51 +1,114 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
-
+import image from "../../public/images/image.png";
+import Image from "next/image";
 
 const form = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [username, setUserName] = useState("");
+  const [uploadedImage, setUploadedImage] = useState(null);
   const router = useRouter();
+  const imageRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const bio = ""
     axios
-      .post("api/register", { name, email, password })
+      .post("api/register", { name, username, email, bio, password, avatar: uploadedImage })
       .then((res) => {
         if (res.data.ok) {
           toast.success("user created");
           router.push("/");
         }
       })
-      .then((err) => {
-        if (err) throw err;
+      .catch((err) => {
+        console.log(err)
+        toast.error("error creating user try again.")
       });
   };
 
+  const handleImageClick = () => {
+    imageRef.current.click();
+  };
+  const handleImageUpload = () => {
+    const file = imageRef.current.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataURL = reader.result;
+      setUploadedImage(dataURL);
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
-    <form className="space-y-4 md:space-y-6 " onSubmit={handleSubmit}>
-      <div>
-        <label
-          htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-600 "
-        >
-          Your Name
-        </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="bg-gray-50 border border-gray-300 text-gray-600 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Jhon"
-          required
-        />
+    <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+      <input
+        type="file"
+        accept="image/*"
+        hidden
+        ref={imageRef}
+        onChange={handleImageUpload}
+      />
+      <div className="flex items-center gap-5 w-full">
+          <div
+            className="relative group flex items-center justify-center cursor-pointer"
+            onClick={handleImageClick}
+          >
+            <Image
+              src={uploadedImage || image}
+              width={130}
+              height={140}
+              className="rounded-md"
+            />
+            <p className="absolute text-nowrap top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 group-hover:block hidden bg-white/70 py-2 px-4 text-sm font-semibold rounded-full">
+              change image.
+            </p>
+          </div>
+        <div>
+          <div className="w-full">
+            <label
+              htmlFor="email"
+              className="block mb-2 text-sm font-medium text-gray-600 "
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="bg-gray-50 border border-gray-300 text-gray-600 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[250px] p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Jhon"
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="email"
+              className="block mb-2 text-sm font-medium text-gray-600 "
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+              className="bg-gray-50 border border-gray-300 text-gray-600 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[250px] p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Smith"
+              required
+            />
+          </div>
+        </div>
       </div>
       <div>
         <label
@@ -92,7 +155,7 @@ const form = () => {
       <p className="text-sm font-light text-gray-700 dark:text-gray-400">
         Don’t have an account yet?{" "}
         <Link
-          href="/register"
+          href="/login"
           className="font-medium text-primary-600 hover:underline dark:text-primary-500"
         >
           Sign in

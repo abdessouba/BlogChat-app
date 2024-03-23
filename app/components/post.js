@@ -1,35 +1,42 @@
-import React from "react";
-import data from "../data.js";
+import React, { Suspense } from "react";
 import Image from "next/image.js";
 import heart from "../../public/images/heart.png";
 import follow from "../../public/images/follow.png";
 import chat from "../../public/images/chat.png";
+import AnimationWrapper from "../AnimationWrapper.js";
+import Link from "next/link.js";
 
-const post = () => {
+const post = ({ post }) => {
+  const dateString = post?.createdAt
+  const dateObject = new Date(dateString);
+  const publishedOn = dateObject.toISOString().split("T")[0];
   return (
-    <div className="w-[800px] h-[210px] bg-gray-100 py-4 px-4 rounded-md shadow-sm hover:shadow-lg transition-all duration-200">
-      {/* image */}
-      <div className="flex items-center gap-2">
-        <div className="border-2 border-gray-400 p-1 rounded-full">
-          <p className="w-[64px] h-[64px] bg-orange-100 rounded-full"></p>
+    <AnimationWrapper>
+      <a href={`getPost/${post?._id}`}>
+        <div className="flex justify-between w-[800px] transition-all duration-200">
+          <section>
+            <div className="flex items-center gap-2 mb-3">
+              <Image src={`/avatars/${post?.userId.avatar}`} width={32} height={32} className="rounded-full border border-gray-800"/>
+              <p className="text-sm">posted by @<span className=" text-gray-600 underline">{post?.userId.username}</span></p>
+            </div>
+            <div>
+              <h1 className="font-bold text-2xl mb-2">{post?.title}</h1>
+              <p className="max-h-[50px] max-w-[500px] truncate ">{post?.description}</p>
+              <div className="text-sm mt-2 flex items-center gap-1">
+                <p>{publishedOn}</p>
+                <span className="font-bold">.</span>
+                <p className="flex items-center gap-1">
+                  {post?.themes.map((t)=><p className="bg-gray-100 py-1 px-2 rounded-full">{t}</p>)}
+                </p>
+              </div>
+            </div>
+          </section>
+          <section>
+            <Image src={`/storage/${post?.image}`} width={250} height={250}/>
+          </section>
         </div>
-        <div>
-          <p>@Name</p>
-          <p className=" text-gray-400 text-sm">Posted at 2020</p>
-        </div>
-      </div>
-      <div className="pt-2">
-        text text text text text text text text text text text text text text
-        text text text text text text text text text text text text text text
-        text text text text text text text text text text text text text text
-        text text text text text text text text text text text text
-      </div>
-      <div className="text-right flex gap-2 item-center justify-end">
-        <Image src={heart} className=" w-[32px] opacity-35 hover:bg-gray-200 hover:opacity-90 p-1 rounded-full cursor-pointer"/>
-        <Image src={chat} className=" w-[30px] opacity-35 hover:bg-gray-200 hover:opacity-90 p-1 rounded-full cursor-pointer"/>
-        <Image src={follow} className=" w-[32px] opacity-35 hover:bg-gray-200 hover:opacity-90 p-1 rounded-full cursor-pointer"/>
-      </div>
-    </div>
+      </a>
+    </AnimationWrapper>
   );
 };
 
