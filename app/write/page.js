@@ -1,11 +1,13 @@
-"use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import initImage from "../../public/images/image.png";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import _image from "../../public/images/_image.png";
-import ReactQuill from "react-quill";
+
+// Import ReactQuill dynamically in the client-side
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
 const Page = () => {
@@ -48,22 +50,22 @@ const Page = () => {
     toolbar: toolbarOptions,
   };
 
-  // const handleClick = () => {
-  //   if (textareaRef.current) {
-  //     textareaRef.current.select();
-  //   }
-  // };
+  const handleClick = () => {
+    if (textareaRef.current) {
+      textareaRef.current.select();
+    }
+  };
 
-  // const calcChars = () => {
-  //   if (textareaRef.current) {
-  //     if (initChars <= 0) {
-  //       textareaRef.current.preventDefault();
-  //     }
-  //     setInitChars(300);
-  //     const num = textareaRef.current.value.length;
-  //     setInitChars((prev) => prev - num);
-  //   }
-  // };
+  const calcChars = () => {
+    if (textareaRef.current) {
+      if (initChars <= 0) {
+        textareaRef.current.preventDefault();
+      }
+      setInitChars(300);
+      const num = textareaRef.current.value.length;
+      setInitChars((prev) => prev - num);
+    }
+  };
   
   const handleThemeInputVal = (e) => {
     setTheme(e.target.value);
@@ -190,6 +192,10 @@ const Page = () => {
           </label>
           <textarea
             ref={textareaRef}
+            onClick={handleClick}
+            onChange={(e) => {
+              calcChars(), setTextArea(e.target.value);
+            }}
             value={textArea}
             className="w-full min-h-[130px] py-3 px-4 text-xl border-2 border-gray-200"
           ></textarea>
