@@ -12,11 +12,10 @@ const Comment = ({ postId }) => {
   const { data: session, status } = useSession();
   const [textarea, setTextarea] = useState("");
   const [comments, setComments] = useState([]);
-  const [reply, setReply] = useState("")
-  const replyRef = useRef("")
+  const [reply, setReply] = useState("");
+  const replyRef = useRef("");
   const user = session?.user;
   const handleComment = () => {
-
     axios
       .post("/api/comment", { comment: textarea, postId })
       .then((res) => {
@@ -35,18 +34,21 @@ const Comment = ({ postId }) => {
   };
 
   useEffect(() => {
-    axios.get(`/api/comment/${postId}`).then((res) => {
-      setComments(res.data.comments);
-    }).catch((err)=>{
-      console.log(err)
-    });
-  }, []);
+    axios
+      .get(`/api/comment/${postId}`)
+      .then((res) => {
+        setComments(res.data.comments);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [postId]);
   const handleCommentReplies = (target) => {
-    const targetParent = target.parentElement
-    const button = document.createElement("button")
-    button.textContent = "Submit"
-    targetParent.appendChild(button)
-    setReply(target.value)
+    const targetParent = target.parentElement;
+    const button = document.createElement("button");
+    button.textContent = "Submit";
+    targetParent.appendChild(button);
+    setReply(target.value);
   };
   return (
     <div>
@@ -54,6 +56,7 @@ const Comment = ({ postId }) => {
       <div className="mt-5 mb-2 flex items-start gap-3">
         <div className="p-[2px] border-gray-700 rounded-full w-fit">
           <Image
+            alt=""
             src={user ? `/avatars/${user?.avatar}` : defaultImage}
             width={60}
             height={60}
@@ -89,8 +92,9 @@ const Comment = ({ postId }) => {
       <section className="my-6">
         {comments.map((comment) => {
           return (
-            <div className="ml-3 mb-5 flex items-start gap-2">
+            <div key={comment._id} className="ml-3 mb-5 flex items-start gap-2">
               <Image
+                alt=""
                 src={`/avatars/${comment.user.avatar}`}
                 width={60}
                 height={60}
@@ -105,7 +109,7 @@ const Comment = ({ postId }) => {
                   <span className="ml-2 text-sm">posted 20 days ago</span>
                 </p>
                 <p className=" w-[800px]">{comment.comment}</p>
-                <Reply/>
+                <Reply />
                 {/* <div className="flex items-center gap-2">
                   <Image
                     src={`/avatars/${comment.user.avatar}`}
