@@ -48,21 +48,23 @@ const Page = () => {
     toolbar: toolbarOptions,
   };
 
-  const handleClick = () => {
-    if (textareaRef.current) {
-      textareaRef.current.select();
-    }
-  };
-  const calcChars = () => {
-    if (textareaRef.current) {
-      if (initChars <= 0) {
-        textareaRef.current.preventDefault();
-      }
-      setInitChars(300);
-      const num = textareaRef.current.value.length;
-      setInitChars((prev) => prev - num);
-    }
-  };
+  // const handleClick = () => {
+  //   if (textareaRef.current) {
+  //     textareaRef.current.select();
+  //   }
+  // };
+
+  // const calcChars = () => {
+  //   if (textareaRef.current) {
+  //     if (initChars <= 0) {
+  //       textareaRef.current.preventDefault();
+  //     }
+  //     setInitChars(300);
+  //     const num = textareaRef.current.value.length;
+  //     setInitChars((prev) => prev - num);
+  //   }
+  // };
+  
   const handleThemeInputVal = (e) => {
     setTheme(e.target.value);
   };
@@ -188,10 +190,6 @@ const Page = () => {
           </label>
           <textarea
             ref={textareaRef}
-            onClick={handleClick}
-            onChange={(e) => {
-              calcChars(), setTextArea(e.target.value);
-            }}
             value={textArea}
             className="w-full min-h-[130px] py-3 px-4 text-xl border-2 border-gray-200"
           ></textarea>
