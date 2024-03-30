@@ -6,9 +6,9 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import _image from "../../public/images/_image.png";
 import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css';
+import "react-quill/dist/quill.snow.css";
 
-const page = () => {
+const Page = () => {
   const textareaRef = useRef(null);
   const inputTheme = useRef(null);
   const fileRef = useRef(null);
@@ -20,34 +20,33 @@ const page = () => {
   const [image, setImage] = useState(null);
   const [uploadedImage, setUploadedImage] = useState();
 
-
-  const [value, setValue] = useState('');
-  const preRef = useRef("")
-  const edtRef = useRef("")
+  const [value, setValue] = useState("");
+  const preRef = useRef("");
+  const edtRef = useRef("");
 
   const toolbarOptions = [
-    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-    ['blockquote', 'code-block'],
-    ['link', 'image', 'video'],
-  
-    [{ 'header': 1 }, { 'header': 2 } ],               // custom button values
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
-    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-    [{ 'direction': 'rtl' }],                         // text direction
-  
-    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-    [{ 'header': [1, 2, 3, false] }],
-  
-    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-    [{ 'font': [] }],
-    [{ 'align': [] }],
-  
-    ['clean']                                         // remove formatting button
+    ["bold", "italic", "underline", "strike"], // toggled buttons
+    ["blockquote", "code-block"],
+    ["link", "image", "video"],
+
+    [{ header: 1 }, { header: 2 }], // custom button values
+    [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+    [{ direction: "rtl" }], // text direction
+
+    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+    [{ header: [1, 2, 3, false] }],
+
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ font: [] }],
+    [{ align: [] }],
+
+    ["clean"], // remove formatting button
   ];
 
-  const module = {
-    toolbar: toolbarOptions
-  }
+  const _module = {
+    toolbar: toolbarOptions,
+  };
 
   const handleClick = () => {
     if (textareaRef.current) {
@@ -143,7 +142,7 @@ const page = () => {
       <Toaster />
       {!uploadedImage && (
         <section className="flex flex-col gap-1 justify-center items-center border-4 border-gray-200 w-[1000px] h-[600px] cursor-pointer hover:bg-gray-50 transition duration-150">
-          <Image src={initImage} className="w-[20%]" />
+          <Image alt="" src={initImage} className="w-[20%]" />
           <p className="text-sm font-semibold text-gray-400">
             Upload your image here.
           </p>
@@ -165,7 +164,7 @@ const page = () => {
       />
       {uploadedImage && (
         <section className="group relative border-4 border-gray-100 p-[3px]">
-          <Image src={uploadedImage} width={1200} height={600} />
+          <Image alt="" src={uploadedImage} width={1200} height={600} />
           <button
             onClick={handleUploadClick}
             className="group-hover:block hidden absolute bg-white/45 py-2 px-3 rounded-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-2xl text-white transition duration-150 cursor-pointer hover:bg-white/55 active:scale-90"
@@ -205,7 +204,13 @@ const page = () => {
             Article Main Content:
           </label>
           <div className="w-full">
-            <ReactQuill  modules={module} ref={edtRef} theme="snow" value={value} onChange={setValue} />
+            <ReactQuill
+              modules={_module}
+              ref={edtRef}
+              theme="snow"
+              value={value}
+              onChange={setValue}
+            />
           </div>
         </div>
       </section>
@@ -232,6 +237,7 @@ const page = () => {
             {themes.map((theme, index) => {
               return (
                 <li
+                  key={index}
                   className="relative bg-gray-50 p-2 w-fit rounded-lg"
                   id={index}
                 >
@@ -260,4 +266,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

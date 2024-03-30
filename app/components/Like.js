@@ -26,7 +26,7 @@ const Like = ({ likes, postId }) => {
     <div className="flex items-center gap-1">
       <Toaster />
       <Image
-        alt=""
+        alt="asd"
         onClick={handleLike}
         src={heart}
         className=" w-[32px] opacity-35 hover:bg-gray-200 hover:opacity-90 p-1 rounded-full cursor-pointer"

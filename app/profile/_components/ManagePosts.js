@@ -30,7 +30,7 @@ const ManagePosts = () => {
             </p>
           )}
           {posts.map((p) => (
-            <AnimationWrapper>
+            <AnimationWrapper key={p._id}>
               <div className="relative flex items-center gap-5 max-w-full shadow-md rounded-sm transition cursor-pointer">
                 <Image
                 alt=""

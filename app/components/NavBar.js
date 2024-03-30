@@ -24,7 +24,7 @@ const NavBar = async () => {
       <ul className="flex justify-between items-center">
         <li className="flex items-center gap-2">
           <Link href="/" className="flex items-center">
-            <Image alt="" src={logo} className="w-[72px]" />
+            <Image alt="asd" src={logo} className="w-[72px]" />
             <p className="relative inline-block font-bold text-3xl mr-5">
               <span className="bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 text-transparent bg-clip-text">
                 BlogChat

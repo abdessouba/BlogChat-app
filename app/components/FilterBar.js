@@ -6,7 +6,7 @@ const FilterBar = () => {
   return (
     <div className='flex gap-3 items-center justify-start '>
         <div className='text-2xl font-semibold mb-4 flex gap-1 items-center'>
-            <Image alt='' src={filter} className='w-[30px]'/>
+            <Image alt="image" src={filter} className='w-[30px]'/>
             <h1>Filter By:</h1>
         </div>
     </div>

@@ -25,9 +25,9 @@ const Follow = ({ follows, postId }) => {
   };
   return (
     <div className="flex items-center gap-1 ml-2">
-      <Toaster/>
+      <Toaster />
       <Image
-      alt=""
+        alt="sa"
         onClick={handleFollow}
         src={add}
         className=" w-[32px] opacity-35 hover:bg-gray-200 hover:opacity-90 p-1 rounded-full cursor-pointer"
