@@ -4,6 +4,9 @@ import Image from "next/image";
 import initImage from "../../public/images/image.png";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import _image from "../../public/images/_image.png";
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
 
 const page = () => {
   const textareaRef = useRef(null);
@@ -16,6 +19,35 @@ const page = () => {
   const [themes, setThemes] = useState([]);
   const [image, setImage] = useState(null);
   const [uploadedImage, setUploadedImage] = useState();
+
+
+  const [value, setValue] = useState('');
+  const preRef = useRef("")
+  const edtRef = useRef("")
+
+  const toolbarOptions = [
+    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+    ['blockquote', 'code-block'],
+    ['link', 'image', 'video'],
+  
+    [{ 'header': 1 }, { 'header': 2 } ],               // custom button values
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
+    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+    [{ 'direction': 'rtl' }],                         // text direction
+  
+    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+    [{ 'header': [1, 2, 3, false] }],
+  
+    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+    [{ 'font': [] }],
+    [{ 'align': [] }],
+  
+    ['clean']                                         // remove formatting button
+  ];
+
+  const module = {
+    toolbar: toolbarOptions
+  }
 
   const handleClick = () => {
     if (textareaRef.current) {
@@ -107,10 +139,10 @@ const page = () => {
   };
 
   return (
-    <div className="w-[80%] m-auto flex flex-col gap-5 items-center p-5 mb-10">
+    <div className="w-[1000px] m-auto flex flex-col gap-5 items-center mb-10">
       <Toaster />
       {!uploadedImage && (
-        <section className="flex flex-col gap-1 justify-center items-center border-4 border-gray-200 w-[800px] h-[500px] cursor-pointer hover:bg-gray-50 transition duration-150">
+        <section className="flex flex-col gap-1 justify-center items-center border-4 border-gray-200 w-[1000px] h-[600px] cursor-pointer hover:bg-gray-50 transition duration-150">
           <Image src={initImage} className="w-[20%]" />
           <p className="text-sm font-semibold text-gray-400">
             Upload your image here.
@@ -133,7 +165,7 @@ const page = () => {
       />
       {uploadedImage && (
         <section className="group relative border-4 border-gray-100 p-[3px]">
-          <Image src={uploadedImage} width={800} height={400} />
+          <Image src={uploadedImage} width={1200} height={600} />
           <button
             onClick={handleUploadClick}
             className="group-hover:block hidden absolute bg-white/45 py-2 px-3 rounded-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-2xl text-white transition duration-150 cursor-pointer hover:bg-white/55 active:scale-90"
@@ -142,14 +174,14 @@ const page = () => {
           </button>
         </section>
       )}
-      <section className="flex flex-col items-center justify-center gap-5">
+      <section className="w-full flex flex-col items-center justify-center gap-5">
         {/* Title */}
         <input
           type="text"
           placeholder="Title of Post..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-[590px] border-b-4 border-gray-200 text-2xl py-2 outline-none focus:border-gray-400 capitalize"
+          className="w-full border-b-4 border-gray-200 text-2xl py-2 outline-none focus:border-gray-400 capitalize"
         />
         <div className="w-full flex flex-col gap-3 mt-2 text-gray-500">
           <label className="font-semibold text-2xl italic">
@@ -162,18 +194,26 @@ const page = () => {
               calcChars(), setTextArea(e.target.value);
             }}
             value={textArea}
-            className="bg-gray-50 w-full min-h-[200px] py-3 px-4 text-xl shadow-inner border-2 border-gray-300 outline-gray-500"
+            className="w-full min-h-[130px] py-3 px-4 text-xl border-2 border-gray-200"
           ></textarea>
           <p className="text-gray-600 font-semibold text-sm ml-1">
             {initChars} left
           </p>
         </div>
+        <div className="w-full flex flex-col gap-3 mt-2 text-gray-500">
+          <label className="font-semibold text-2xl italic">
+            Article Main Content:
+          </label>
+          <div className="w-full">
+            <ReactQuill  modules={module} ref={edtRef} theme="snow" value={value} onChange={setValue} />
+          </div>
+        </div>
       </section>
-      <section className="w-[600px]">
+      <section className="w-full">
         <h1 className="italic font-semibold text-2xl text-gray-500 mb-3">
           Themes
         </h1>
-        <div className="relative bg-gray-200 p-5 w-full min-h-[120px]">
+        <div className="relative bg-gray-100 p-5 w-full min-h-[130px]">
           <input
             type="text"
             className="w-full py-3 px-4 text-xl shadow rounded-md"

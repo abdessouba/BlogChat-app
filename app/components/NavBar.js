@@ -89,7 +89,7 @@ const NavBar = async () => {
               </li>
             )}
             <li>
-              {!session && <Link href="/login">Join us</Link>}
+              {!session && <Link href="/login" className="bg-gray-300 text-gray-50 active:ring active:ring-gray-300 transition px-4 py-2 rounded-lg font-semibold">Join us</Link>}
               {session && (
                 <div>
                   <div className="group relative rounded-full cursor-pointer  transition duration-200 z-20">
@@ -102,9 +102,9 @@ const NavBar = async () => {
                       alt="l"
                       className="w-[58px] h-[58px] rounded-full box-border border-2 border-white hover:ring hover:ring-gray-900 transition duration-500"
                     />
-                    <div className="absolute h-[0px] overflow-hidden group-hover:h-[200px] group-hover:opacity-100 opacity-0 -right-32 mt-2 w-[190px] bg-slate-50/10 rounded-md shadow ease-in-out duration-300">
+                    <div className="absolute h-[0px] overflow-hidden group-hover:h-[200px] group-hover:opacity-100 opacity-0 -right-32 mt-2 w-[190px] bg-white rounded-md shadow ease-in-out duration-300">
                       <Link
-                        href="/profile/edit"
+                        href="/profile/show"
                         className="text-xl flex items-center gap-1 mb-2 hover:bg-gray-100 py-2 px-2 transition duration-200 cursor-pointer"
                       >
                         <Image src={profile} alt="image" className="w-[24px]" />

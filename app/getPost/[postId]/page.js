@@ -40,7 +40,7 @@ const page = async (props) => {
   return (
     <AnimationWrapper>
       <div className="text-gray-800 w-[50%] max-sm:w-[90%] m-auto my-10">
-        <img src={`/storage/${data?.image}`} className="rounded-sm" />
+        <img src={`/storage/${data?.image}`} className="" />
         <h1 className="font-bold max-sm:text-lg text-5xl first-letter:uppercase mt-3 leading-[60px] italic mx-2">
           {data?.title}.
         </h1>
@@ -48,7 +48,7 @@ const page = async (props) => {
           <div className="flex gap-3">
             <img
               src={`/avatars/${data?.userId.avatar}`}
-              className="w-[64px] h-[64px] rounded-full border-2 border-gray-400"
+              className="w-[64px] h-[64px] rounded-full border-gray-400"
             />
             <div className="mt-1">
               <div>
@@ -65,7 +65,7 @@ const page = async (props) => {
           </div>
         </div>
         <hr />
-        <div className="flex items-center justify-between my-2">
+        <div className="flex items-center justify-between my-3 px-4">
           <div className="flex items-center gap-2">
             <Like likes={data?.like.length} postId={data?._id} />
             <div className="flex items-center gap-1 ml-2">

@@ -6,6 +6,7 @@ import AnimationWrapper from "../AnimationWrapper";
 import defaultImage from "../../public/images/user.png";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Reply from "./Reply";
 
 const Comment = ({ postId }) => {
   const { data: session, status } = useSession();
@@ -51,7 +52,7 @@ const Comment = ({ postId }) => {
     <div>
       <Toaster />
       <div className="mt-5 mb-2 flex items-start gap-3">
-        <div className="p-[2px] border-2 border-gray-700 rounded-full w-fit">
+        <div className="p-[2px] border-gray-700 rounded-full w-fit">
           <Image
             src={user ? `/avatars/${user?.avatar}` : defaultImage}
             width={60}
@@ -104,9 +105,7 @@ const Comment = ({ postId }) => {
                   <span className="ml-2 text-sm">posted 20 days ago</span>
                 </p>
                 <p className=" w-[800px]">{comment.comment}</p>
-                <p className="text-left text-gray-600 cursor-pointer hover:text-gray-400  transition w-fit hover:bg-slate-200 px-2 py-1 rounded-full active:bg-slate-300">
-                  reply
-                </p>
+                <Reply/>
                 {/* <div className="flex items-center gap-2">
                   <Image
                     src={`/avatars/${comment.user.avatar}`}

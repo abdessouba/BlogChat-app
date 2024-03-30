@@ -9,7 +9,7 @@ export async function POST(req){
     const {data} = await req.json()
     const session = await getServerSession(authOptions)
 
-    if(!data.newPass || data.confPass){
+    if(!data.newPass || !data.confPass){
         return NextResponse.json({message: "empty field.", ok: false})
     }
     if(data.newPass !== data.confPass){

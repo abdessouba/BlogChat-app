@@ -49,8 +49,6 @@ export async function GET(req) {
   try {
     await connectToMongodb();
     const posts = await Post.find().populate({path: "userId", select:"email username name avatar -_id"}).exec();
-    // console.log(posts)
-    // const {email, name, avatar} = await User.findById(posts[0].userId)
     return NextResponse.json({ data: posts, ok: true });
   } catch (error) {
     console.log(error);

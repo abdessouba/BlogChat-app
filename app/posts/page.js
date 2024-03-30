@@ -4,7 +4,6 @@ import Post from "../components/post";
 import Tag from "../components/tag";
 import FilterBar from "../components/FilterBar";
 import AnimationWrapper from "../AnimationWrapper";
-import { Suspense } from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import LoadingPage from "../components/loading";
@@ -32,7 +31,7 @@ const page = () => {
         <div className=" flex justify-center">
           <div className="flex flex-col gap-3 items-start">
             <FilterBar />
-            <div className="flex items-start gap-14 justify-center">
+            <div className="flex items-start gap-7 justify-center">
               <section className="flex flex-col gap-10 w-[820px]">
                 {loading && <LoadingPage />}
                 {!loading &&
@@ -40,7 +39,7 @@ const page = () => {
                     return <Post post={post} />;
                   })}
               </section>
-              <div className="flex flex-col items-start gap-5">
+              <div className="flex flex-col items-start gap-3">
                 <section className="w-[350px] min-h-[200px] py-4 px-6 rounded-lg">
                   <h1 className="text-xl font-semibold mb-3">Select Your Interest:</h1>
                   <ul className="flex gap-2 flex-wrap">

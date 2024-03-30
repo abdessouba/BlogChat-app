@@ -1,5 +1,6 @@
 import mongoose, { Schema, models } from "mongoose";
 
+
 const postSchema = new Schema({
     title: {
         type: String,
