@@ -13,7 +13,7 @@ const post = ({ post }) => {
         <div className="flex justify-between w-[800px] transition-all duration-200">
           <section>
             <div className="flex items-center gap-2 mb-3">
-              <Image src={`/avatars/${post?.userId.avatar}`} width={32} height={32} className="rounded-full border border-gray-800"/>
+              <Image alt="" src={`/avatars/${post?.userId.avatar}`} width={32} height={32} className="rounded-full border border-gray-800"/>
               <p className="text-sm">posted by @<Link href={`/users/${post?.userId.username}`} className=" text-gray-600 underline">{post?.userId.username}</Link></p>
             </div>
             <div>
@@ -23,13 +23,13 @@ const post = ({ post }) => {
                 <p>{publishedOn}</p>
                 <span className="font-bold">.</span>
                 <p className="flex items-center gap-1">
-                  {post?.themes.map((t)=><span className="bg-gray-100 py-1 px-2 rounded-full">{t}</span>)}
+                  {post?.themes.map((t)=><span key={t._id} className="bg-gray-100 py-1 px-2 rounded-full">{t}</span>)}
                 </p>
               </div>
             </div>
           </section>
           <section>
-            <Image src={`/storage/${post?.image}`} width={250} height={250}/>
+            <Image alt="" src={`/storage/${post?.image}`} width={250} height={250}/>
           </section>
         </div>
       </a>

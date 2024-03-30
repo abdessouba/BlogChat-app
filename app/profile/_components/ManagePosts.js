@@ -33,12 +33,14 @@ const ManagePosts = () => {
             <AnimationWrapper>
               <div className="relative flex items-center gap-5 max-w-full shadow-md rounded-sm transition cursor-pointer">
                 <Image
+                alt=""
                   src={`/storage/${p.image}`}
                   width={340}
                   height={200}
                   className=""
                 />
                 <Image
+                alt=""
                   src={edit}
                   className="absolute right-1 bottom-1 w-[43px] p-2 rounded-md hover:bg-gray-200/40 transition"
                 />
@@ -52,20 +54,20 @@ const ManagePosts = () => {
                   <div className="flex items-center gap-2">
                     <p className="font-semibold">About: </p>
                     {p.themes.map((theme) => (
-                      <p className="text-gray-500 underline">{theme}</p>
+                      <p key={theme} className="text-gray-500 underline">{theme}</p>
                     ))}
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-1">
-                      <Image src={views} className="w-[20px]" />
+                      <Image alt="" src={views} className="w-[20px]" />
                       <p className="font-semibold">{p.views || 0}</p>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Image src={likes} className="w-[16px]" />
+                      <Image alt="" src={likes} className="w-[16px]" />
                       <p className="font-semibold">{p.like.length}</p>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Image src={comments} className="w-[16px]" />
+                      <Image alt="" src={comments} className="w-[16px]" />
                       <p className="font-semibold">{p.comments.length}</p>
                     </div>
                   </div>

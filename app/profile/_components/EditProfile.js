@@ -26,8 +26,8 @@ const EditProfile = () => {
   useEffect(() => {
     axios.get("/api/authUser").then((res) => {
       const user = res.data.authUser;
-      if(user){
-        setLoading(false)
+      if (user) {
+        setLoading(false);
       }
       setAuthUser(user);
       setName(user.name);
@@ -101,6 +101,7 @@ const EditProfile = () => {
               className="group relative w-fit rounded-full"
             >
               <Image
+                alt=""
                 src={
                   uploadedImage ? uploadedImage : `/avatars/${authUser?.avatar}`
                 }
@@ -119,8 +120,8 @@ const EditProfile = () => {
               Upload
             </button>
             <p className="text-[12px] text-gray-400 max-w-[150px] mt-1 m-auto text-center">
-              <Image src={caution} className="inline" /> changing the image{" "}
-              <span className="ml-4">requires re-login.</span>
+              <Image alt="" src={caution} className="inline" /> changing the
+              image <span className="ml-4">requires re-login.</span>
             </p>
             <input
               type="file"
@@ -139,6 +140,7 @@ const EditProfile = () => {
                   onChange={(e) => setName(e.target.value)}
                 />
                 <Image
+                  alt=""
                   src={userIcon}
                   width={16}
                   height={16}
@@ -153,6 +155,7 @@ const EditProfile = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <Image
+                  alt=""
                   src={mail}
                   width={16}
                   height={16}
@@ -171,6 +174,7 @@ const EditProfile = () => {
                 onChange={(e) => setUsername(e.target.value)}
               />
               <Image
+                alt=""
                 src={arroba}
                 width={16}
                 height={16}
@@ -197,6 +201,7 @@ const EditProfile = () => {
                     onChange={(e) => setGithub(e.target.value)}
                   />
                   <Image
+                    alt=""
                     src={github_img}
                     width={16}
                     height={16}
@@ -211,6 +216,7 @@ const EditProfile = () => {
                     onChange={(e) => setWebsite(e.target.value)}
                   />
                   <Image
+                    alt=""
                     src={link_img}
                     width={16}
                     height={16}

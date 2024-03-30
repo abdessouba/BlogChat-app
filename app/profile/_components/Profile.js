@@ -18,8 +18,11 @@ const Profile = () => {
       setLoading(false);
       const user = res.data.authUser;
       setUser(user);
-      let totalViews = user.posts.reduce((total, post) => total + +post.views, 0);
-        setViews(totalViews);
+      let totalViews = user.posts.reduce(
+        (total, post) => total + +post.views,
+        0
+      );
+      setViews(totalViews);
     });
   }, []);
 
@@ -30,6 +33,7 @@ const Profile = () => {
         <>
           <div className="w-[600px] h-[500px] bg-gray-50 shadow-lg flex flex-col items-center justify-center">
             <Image
+              alt=""
               src={`/avatars/${user.avatar}`}
               width={128}
               height={128}
@@ -64,18 +68,31 @@ const Profile = () => {
           </div>
           <div className="flex flex-col items-center justify-between py-6 px-4 h-[500px] bg-gray-50 shadow-lg rounded-xl">
             <Link href="/posts">
-              <Image src={home} className="w-[30px] cursor-pointer" />
+              <Image alt="" src={home} className="w-[30px] cursor-pointer" />
             </Link>
             <div className="flex flex-col gap-10">
               <a href={`${user.github || ""}`} target="_blank">
-                <Image src={github} className="w-[30px] cursor-pointer" />
+                <Image
+                  alt=""
+                  src={github}
+                  className="w-[30px] cursor-pointer"
+                />
               </a>
               <a href={`${user.website || ""}`} target="_blank">
-                <Image src={website} className="w-[30px] cursor-pointer" />
+                <Image
+                  alt=""
+                  src={website}
+                  className="w-[30px] cursor-pointer"
+                />
               </a>
-              <Image src={share} className="w-[30px] cursor-pointer" />
+              <Image alt="" src={share} className="w-[30px] cursor-pointer" />
             </div>
-            <Image onClick={signOut} src={logout} className="w-[30px] cursor-pointer ml-1" />
+            <Image
+              alt=""
+              onClick={signOut}
+              src={logout}
+              className="w-[30px] cursor-pointer ml-1"
+            />
           </div>
         </>
       )}

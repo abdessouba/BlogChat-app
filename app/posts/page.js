@@ -10,7 +10,7 @@ import LoadingPage from "../components/loading";
 import Image from "next/image";
 import trend from "../../public/images/trend.png"
 
-const page = () => {
+const Page = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -36,7 +36,7 @@ const page = () => {
                 {loading && <LoadingPage />}
                 {!loading &&
                   data.map((post) => {
-                    return <Post post={post} />;
+                    return <Post key={post._id} post={post} />;
                   })}
               </section>
               <div className="flex flex-col items-start gap-3">
@@ -53,7 +53,7 @@ const page = () => {
                   </ul>
                 </section>
                 <section className="w-[350px] min-h-[200px] bg-gray-100 py-4 px-6 rounded-lg">
-                  <h1 className="text-xl font-semibold">Trends <Image src={trend} className="inline"/></h1>
+                  <h1 className="text-xl font-semibold">Trends <Image alt="" src={trend} className="inline"/></h1>
                 </section>
               </div>
             </div>
@@ -64,4 +64,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

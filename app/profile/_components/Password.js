@@ -20,21 +20,24 @@ const Password = () => {
       newPass: e.target.newPass.value,
       confPass: e.target.confPass.value,
     };
-    axios.post("/api/updatePass", {data: data}).then((res)=>{
-      if(res.data.ok){
-        toast.success("password updated.")
-      }else{
-        toast.error(res.data.message)
-      }
-    }).catch((err)=>{
-      console.log(err.message)
-    })
+    axios
+      .post("/api/updatePass", { data: data })
+      .then((res) => {
+        if (res.data.ok) {
+          toast.success("password updated.");
+        } else {
+          toast.error(res.data.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
   return (
     <form className="mt-10 m-auto" onSubmit={handleFormSubmit}>
-      <Toaster/>
+      <Toaster />
       <div className="flex gap-1 items-center mb-5">
-        <Image src={settings} width={40} />
+        <Image alt="" src={settings} width={40} />
         <h1 className="text-4xl font-bold">Change Password</h1>
       </div>
       <div className="relative flex flex-col gap-1">
@@ -46,6 +49,7 @@ const Password = () => {
         />
         {!visability.currPass && (
           <Image
+            alt=""
             src={invisible}
             onClick={() => {
               setVisability((prev) => {
@@ -57,6 +61,7 @@ const Password = () => {
         )}
         {visability.currPass && (
           <Image
+            alt=""
             src={visible}
             onClick={() => {
               setVisability((prev) => {
@@ -76,6 +81,7 @@ const Password = () => {
         />
         {!visability.newPass && (
           <Image
+            alt=""
             src={invisible}
             onClick={() => {
               setVisability((prev) => {
@@ -87,6 +93,7 @@ const Password = () => {
         )}
         {visability.newPass && (
           <Image
+            alt=""
             src={visible}
             onClick={() => {
               setVisability((prev) => {
@@ -106,6 +113,7 @@ const Password = () => {
         />
         {!visability.confPass && (
           <Image
+            alt=""
             src={invisible}
             onClick={() => {
               setVisability((prev) => {
@@ -117,6 +125,7 @@ const Password = () => {
         )}
         {visability.confPass && (
           <Image
+            alt=""
             src={visible}
             onClick={() => {
               setVisability((prev) => {
@@ -127,9 +136,7 @@ const Password = () => {
           />
         )}
       </div>
-      <button
-        className=" mt-2 bg-gray-800 text-white w-[400px] py-3 px-4 rounded-md cursor-pointer hover:bg-gray-900 transition"
-      >
+      <button className=" mt-2 bg-gray-800 text-white w-[400px] py-3 px-4 rounded-md cursor-pointer hover:bg-gray-900 transition">
         Confirm
       </button>
     </form>

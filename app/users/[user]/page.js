@@ -9,7 +9,7 @@ import send from "../../../public/images/send.png";
 import { useSession } from "next-auth/react";
 import AnimationWrapper from "@/app/AnimationWrapper";
 
-const page = ({ params }) => {
+const Page = ({ params }) => {
   const { data: session, status } = useSession();
   const [user, setUser] = useState(null);
   const [showContact, setShowContact] = useState(false);
@@ -24,7 +24,7 @@ const page = ({ params }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [params.user]);
   
   // const dateString = post?.createdAt
   // const dateObject = new Date(dateString);
@@ -42,7 +42,7 @@ const page = ({ params }) => {
               <div className="h-[600px] py-6 flex flex-col gap-10 px-2">
                 {user.posts.map((post) => {
                   return (
-                    <a href={`getPost/${post?._id}`} className="border-l-4 pl-4 hover:border-gray-500 transition duration-150">
+                    <a key={post?._id} href={`getPost/${post?._id}`} className="border-l-4 pl-4 hover:border-gray-500 transition duration-150">
                       <div className="flex justify-between w-[800px] transition-all duration-200">
                         <section>
                           <div>
@@ -57,7 +57,7 @@ const page = ({ params }) => {
                               <span className="font-bold">.</span>
                               <p className="flex items-center gap-1">
                                 {post?.themes.map((theme) => (
-                                  <span className="bg-gray-100 py-1 px-2 rounded-full">
+                                  <span key={theme} className="bg-gray-100 py-1 px-2 rounded-full">
                                     {theme}
                                   </span>
                                 ))}
@@ -67,6 +67,7 @@ const page = ({ params }) => {
                         </section>
                         <section>
                           <Image
+                          alt=""
                             src={`/storage/${post?.image}`}
                             width={250}
                             height={250}
@@ -81,6 +82,7 @@ const page = ({ params }) => {
           </section>
           <section className="w-[350px] border-l-4 border-gray-100 flex flex-col gap-2 pl-8 py-2">
             <Image
+            alt=""
               src={`/avatars/${user.avatar}`}
               width={120}
               height={120}
@@ -114,12 +116,12 @@ const page = ({ params }) => {
             <div className="flex items-center gap-2 ">
               {user.github && (
                 <a href={`${user.github || ""}`} target="_blank">
-                  <Image src={github} className="w-[24px] cursor-pointer" />
+                  <Image alt="" src={github} className="w-[24px] cursor-pointer" />
                 </a>
               )}
               {user.website && (
                 <a href={`${user.website || ""}`} target="_blank">
-                  <Image src={website} className="w-[24px] cursor-pointer" />
+                  <Image alt="" src={website} className="w-[24px] cursor-pointer" />
                 </a>
               )}
             </div>
@@ -127,7 +129,7 @@ const page = ({ params }) => {
               Joined on {user.createdAt.slice(0, user.createdAt.indexOf("T"))}
             </p>
             <div onClick={()=>setShowContact(true)} className="mt-2 flex items-center gap-2 bg-gray-200 w-fit rounded-full py-3 px-4  active:scale-95 transition duration-150 cursor-pointer">
-              <Image src={send} width={20} className="w-[20px]" />
+              <Image alt="" src={send} width={20} className="w-[20px]" />
               <p className="font-semibold cursor-pointer">Contact</p>
             </div>
             { showContact && (
@@ -147,4 +149,4 @@ const page = ({ params }) => {
   );
 };
 
-export default page;
+export default Page;

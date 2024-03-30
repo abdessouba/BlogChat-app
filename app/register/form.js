@@ -7,7 +7,7 @@ import axios from "axios";
 import image from "../../public/images/image.png";
 import Image from "next/image";
 
-const form = () => {
+const Form = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -62,6 +62,7 @@ const form = () => {
             onClick={handleImageClick}
           >
             <Image
+            alt=""
               src={uploadedImage || image}
               width={130}
               height={140}
@@ -165,4 +166,4 @@ const form = () => {
   );
 };
 
-export default form;
+export default Form;
