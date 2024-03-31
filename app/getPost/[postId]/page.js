@@ -40,7 +40,7 @@ const page = async (props) => {
   return (
     <AnimationWrapper>
       <div className="text-gray-800 w-[50%] max-sm:w-[90%] m-auto my-10">
-        <Image alt="" src={`/storage/${data?.image}`} className="" />
+        <Image alt="" src={`/storage/${data?.image}`} width={1000} height={600} className="" />
         <h1 className="font-bold max-sm:text-lg text-5xl first-letter:uppercase mt-3 leading-[60px] italic mx-2">
           {data?.title}.
         </h1>
@@ -49,6 +49,8 @@ const page = async (props) => {
             <Image
               alt=""
               src={`/avatars/${data?.userId.avatar}`}
+              width={64}
+              height={64}
               className="w-[64px] h-[64px] rounded-full border-gray-400"
             />
             <div className="mt-1">
