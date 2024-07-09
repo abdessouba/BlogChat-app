@@ -21,3 +21,6 @@ It is a website for bloging (publishing posts) and chating with users to change 
 
 ##### 6- Start socket.io
 `npm start`
+
+# My Website BLOGCHAT:
+![Screenshot 2024-07-09 115859](https://github.com/abdessouba/BlogChat-app/assets/160285551/aee89cb4-82db-410d-a88a-2101f36ebe3e)
