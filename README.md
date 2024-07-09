@@ -92,4 +92,5 @@ It is a website for bloging (publishing posts) and chating with users to change 
 ![Screenshot 2024-07-09 122133](https://github.com/abdessouba/BlogChat-app/assets/160285551/2c9100fe-5b6e-480c-99d3-da9427834bac)
 
 ## 8- Interactive Design
-![Screenshot_20240709_135023_com android chrome-imageonline co-merged](https://github.com/abdessouba/BlogChat-app/assets/160285551/7832580e-4231-4aa3-a114-a1168cda24fc)
+![Screenshot_20240709_135023_com android chrome-imageonline co-merged (1)](https://github.com/abdessouba/BlogChat-app/assets/160285551/dad8e965-7332-4ed8-81ea-0261e3dfceac)
+![Screenshot_20240709_134047_com android chrome-imageonline co-merged (1)](https://github.com/abdessouba/BlogChat-app/assets/160285551/aeff52b4-548b-4c01-b3f5-b6bd0a8462cf)
