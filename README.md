@@ -12,13 +12,12 @@ It is a website for bloging (publishing posts) and chating with users to change 
 
 ##### 3- Install project:
 `npm install`
-*it will take some time
 
 ##### 4- Run project
 `npm run dev`
 
-##### 5- Run socket.io server
-*open new terminal
-
+##### 5- Change directory to socket.io
 `cd socket.io`
+
+##### 6- Start socket.io
 `npm start`
