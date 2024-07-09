@@ -16,7 +16,7 @@ It is a website for bloging (publishing posts) and chating with users to change 
 ##### 4- Run project
 `npm run dev`
 
-##### 5- Change directory to socket.io
+##### 5- Change directory to socket.io (open new terminal)
 `cd socket.io`
 
 ##### 6- Start socket.io
