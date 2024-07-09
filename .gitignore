@@ -39,3 +39,6 @@ next-env.d.ts
 #images uploaded
 /public/avatars/
 /public/storage/
+
+#socket.io node modules
+/socket.io/node_modules
