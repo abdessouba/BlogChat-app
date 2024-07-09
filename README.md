@@ -91,4 +91,6 @@ It is a website for bloging (publishing posts) and chating with users to change 
 ### Register
 ![Screenshot 2024-07-09 122133](https://github.com/abdessouba/BlogChat-app/assets/160285551/2c9100fe-5b6e-480c-99d3-da9427834bac)
 
+## 8- Interactive Design
+![Screenshot_20240709_134005_com android chrome](https://github.com/abdessouba/BlogChat-app/assets/160285551/4000221f-63a6-4236-8190-e76549625b2d)![Screenshot_20240709_134047_com android chrome](https://github.com/abdessouba/BlogChat-app/assets/160285551/0eabe78c-e093-4fa2-b4a2-2c6ed5e4351c)![Screenshot_20240709_133915_com android chrome](https://github.com/abdessouba/BlogChat-app/assets/160285551/e6dd2ebb-0318-492a-aa5e-540eeee5878c)![Screenshot_20240709_133936_com android chrome](https://github.com/abdessouba/BlogChat-app/assets/160285551/0f52345d-78a9-4da4-bf43-841de7927e6d)
 
