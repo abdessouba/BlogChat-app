@@ -23,4 +23,5 @@ It is a website for bloging (publishing posts) and chating with users to change 
 `npm start`
 
 # My Website BLOGCHAT:
+### 1- Home page
 ![Screenshot 2024-07-09 115859](https://github.com/abdessouba/BlogChat-app/assets/160285551/aee89cb4-82db-410d-a88a-2101f36ebe3e)
