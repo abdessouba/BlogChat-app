@@ -69,7 +69,14 @@ It is a website for bloging (publishing posts) and chating with users to change 
 #### Change Password
 ![Screenshot 2024-07-09 121905](https://github.com/abdessouba/BlogChat-app/assets/160285551/0693b0ab-feb1-4f72-9216-eceded3d1731)
 
-#### Notifications
+#### Notifications System
+
+![Screenshot 2024-07-09 122642](https://github.com/abdessouba/BlogChat-app/assets/160285551/9b6e57a6-74df-466a-828f-4fbe24efdd87)
+
+![Screenshot 2024-07-09 122721](https://github.com/abdessouba/BlogChat-app/assets/160285551/bd5ee27a-e447-460a-b8d3-0bf58b207ae6)
+
+![Screenshot 2024-07-09 122802](https://github.com/abdessouba/BlogChat-app/assets/160285551/49b5dacd-7b6d-41da-af6e-e0765c21fc43)
+
 ![Screenshot 2024-07-09 121940](https://github.com/abdessouba/BlogChat-app/assets/160285551/c2d9d660-880b-4ee9-a2c1-892a2b6837c8)
 
 
