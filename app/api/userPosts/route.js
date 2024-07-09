@@ -12,7 +12,7 @@ export async function GET(){
     const {_id} = session.user
     try {
         connectToMongodb()
-        const {posts} = await User.findById(_id).populate({path: "posts"}).exec()
+        const {posts} = await User.findById(_id).populate({path: "posts", select:"_id image description title views like comments themes"}).exec()
         return NextResponse.json({posts, ok: true})
     } catch (error) {
         return NextResponse.json({message: error.message, ok: false})

@@ -8,7 +8,7 @@ export async function GET(req) {
   const username = url.slice(url.lastIndexOf("/") + 1);
   try {
     await connectToMongodb();
-    const user = await User.findOne({username}, {_id:false, email: true, avatar: true, username: true, name: true, bio: true, github: true, website: true, createdAt: true}).populate({path:"posts", model: Post, populate:{path: "userId", model: User}}).exec();
+    const user = await User.findOne({username}, {email: true, avatar: true, username: true, name: true, bio: true, github: true, website: true, createdAt: true}).populate({path:"posts", model: Post, populate:{path: "userId", model: User}}).exec();
     if(!user){
       return NextResponse.json({ message: "no such user", ok: false });
     }

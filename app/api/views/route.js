@@ -6,7 +6,6 @@ import { authOptions } from "../auth/[...nextauth]/route"
 
 export async function POST(req){
     const {postId} = await req.json()
-    
     try {
         connectToMongodb()
         const post = await Post.findById(postId)

@@ -2,9 +2,9 @@
 
 import React from "react";
 
-const loading = () => {
+const Loading = ({className=""}) => {
   return (
-    <div>
+    <div className={className}>
       <div role="status" className="text-center">
         <svg
           aria-hidden="true"
@@ -28,4 +28,4 @@ const loading = () => {
   );
 };
 
-export default loading;
+export default Loading;

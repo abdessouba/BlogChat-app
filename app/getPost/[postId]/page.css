@@ -1,0 +1,10 @@
+.remove-border{
+    border: none !important;
+}
+.editor{
+    margin: 10px 0 !important;
+}
+.jodit-container:not(.jodit_inline) .jodit-wysiwyg{
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}

@@ -13,7 +13,8 @@ export async function POST(req) {
     return NextResponse.json({ message: "unauthorized", ok: false });
   }
   const data = await req.json();
-  const userId = authUser?._id;
+  const userId = authUser._id;
+  
   try {
     connectToMongodb();
     const user = await User.findById(userId);

@@ -9,6 +9,7 @@ import link_img from "../../../public/images/link.png";
 import Image from "next/image";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Loading from "@/app/loading";
 
 const EditProfile = () => {
   const imageRef = useRef("");
@@ -91,10 +92,10 @@ const EditProfile = () => {
   };
   return (
     <>
-      {loading && <div>loading...</div>}
+      {loading && <Loading className="m-auto text-center w-[700px] max-lx:w-[400px] max-sm:w-[300px]"/>}
       {!loading && (
-        <>
-          <section className="m-auto">
+        <div className="flex max-lg:flex-col px-4 max-lg:items-center my-10">
+          <section className="mx-4">
             {/* <h1 className="text-lg">Editing Profile:</h1> */}
             <div
               onClick={inputTrigger}
@@ -115,13 +116,13 @@ const EditProfile = () => {
             </div>
             <button
               onClick={inputTrigger}
-              className="w-full py-3 px-10 bg-gray-100 rounded-full hover:bg-gray-200 transition cursor-pointer"
+              className="w-full max-lg:w-[180px] py-3 px-10 bg-gray-100 rounded-full hover:bg-gray-200 transition cursor-pointer"
             >
               Upload
             </button>
-            <p className="text-[12px] text-gray-400 max-w-[150px] mt-1 m-auto text-center">
+            <p className="text-[12px] text-gray-400 max-w-[150px] mt-1 m-auto text-center max-lg:text-start">
               <Image alt="" src={caution} className="inline" /> changing the
-              image <span className="ml-4">requires re-login.</span>
+              image <span className="ml-5 ">requires re-login.</span>
             </p>
             <input
               type="file"
@@ -131,11 +132,11 @@ const EditProfile = () => {
             />
           </section>
           <section className="text-lg flex flex-col gap-5">
-            <div className="flex items-center gap-5 justify-center">
-              <div className="relative">
+            <div className="flex max-lg:flex-col max-lg:w-full items-center gap-5 justify-center">
+              <div className="relative w-full">
                 <input
                   type="text"
-                  className="w-[300px] rounded-md bg-gray-100 py-4 px-8"
+                  className="w-full rounded-md bg-gray-100 py-4 px-8"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -147,10 +148,10 @@ const EditProfile = () => {
                   className="absolute left-3 top-1/2 -translate-y-1/2"
                 />
               </div>
-              <div className="relative">
+              <div className="relative w-full">
                 <input
                   type="text"
-                  className="w-[300px] rounded-md bg-gray-100 py-4 px-8"
+                  className="w-full rounded-md bg-gray-100 py-4 px-8"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -164,7 +165,7 @@ const EditProfile = () => {
               </div>
             </div>
             <div className="relative">
-              <p className="text-sm mb-2">
+              <p className=" text-xs mb-2">
                 username will be used for search and shown in your posts.
               </p>
               <input
@@ -178,7 +179,7 @@ const EditProfile = () => {
                 src={arroba}
                 width={16}
                 height={16}
-                className="absolute left-3 top-[52px]"
+                className="absolute left-3 top-[47px]"
               />
             </div>
             <div>
@@ -192,11 +193,11 @@ const EditProfile = () => {
             </div>
             <div>
               <p className="text-lg mb-2">Social Media:</p>
-              <div className="flex items-center gap-4">
-                <div className="relative">
+              <div className="flex max-lg:flex-col items-center gap-4">
+                <div className="relative w-full">
                   <input
                     type="text"
-                    className="w-[300px] rounded-md bg-gray-100 py-3 px-8"
+                    className="w-full rounded-md bg-gray-100 py-3 px-8"
                     value={github || "http://"}
                     onChange={(e) => setGithub(e.target.value)}
                   />
@@ -208,10 +209,10 @@ const EditProfile = () => {
                     className="absolute left-3 top-1/2 -translate-y-1/2"
                   />
                 </div>
-                <div className="relative">
+                <div className="relative w-full">
                   <input
                     type="text"
-                    className="w-[300px] rounded-md bg-gray-100 py-3 px-9"
+                    className="w-full rounded-md bg-gray-100 py-3 px-9"
                     value={website || "http://"}
                     onChange={(e) => setWebsite(e.target.value)}
                   />
@@ -232,7 +233,7 @@ const EditProfile = () => {
               update
             </button>
           </section>
-        </>
+        </div>
       )}
     </>
   );

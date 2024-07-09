@@ -8,6 +8,7 @@ import logout from "../../../public/images/logout2.png";
 import home from "../../../public/images/home2.png";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import Loading from "@/app/loading";
 
 const Profile = () => {
   const [user, setUser] = useState("");
@@ -27,11 +28,12 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center w-full m-auto gap-10 rounded-md mt-10">
-      {loading && <div>Loading</div>}
+    <div className="mx-10 flex items-center justify-center max-[1020px]:justify-start max-[1020px]:mx-5 max-[560px]:mx-0 max-[560px]:mt-5 w-full m-auto max-[890px]:gap-5 gap-10 rounded-md mt-10">
+      {loading && <Loading className="m-auto text-center w-[700px] max-lx:w-[400px] max-sm:w-[300px]"/>}
       {!loading && (
         <>
-          <div className="w-[600px] h-[500px] bg-gray-50 shadow-lg flex flex-col items-center justify-center">
+        {/* w-[600px] h-[500px] */}
+          <div className="w-auto h-auto p-20 max-[712px]:p-14 max-[545px]:p-10 bg-gray-50 shadow-lg flex flex-col items-center justify-center">
             <Image
               alt=""
               src={`/avatars/${user.avatar}`}
@@ -43,30 +45,47 @@ const Profile = () => {
               {user.name}
             </h1>
             <h2 className=" text-gray-600 text-sm">@{user.username}</h2>
-            <p className="w-[400px] font-light text-center my-2">{user.bio}.</p>
-            <section className="flex gap-10 items-center justify-center mt-5">
-              <Link
+            <p className="w-[400px] max-[672px]:w-[200px] font-light text-center my-2">{user.bio}.</p>
+            <section className="flex gap-10 max-[522px]:gap-5 items-center justify-center mt-5 mb-7">
+              <div
                 href="/profile/manage"
                 className="flex flex-col items-center"
               >
-                <h1 className="text-5xl font-semibold">
+                <h1 className="text-5xl max-[672px]:text-3xl max-[672px]:font-bold font-semibold">
                   {user.posts?.length || 0}
                 </h1>
                 <p className="text-gray-400">Articles</p>
-              </Link>
-              <div className="flex flex-col items-center px-12 border-r-[3px] border-l-[3px] border-gray-500">
-                <h1 className="text-5xl font-semibold">
+              </div>
+              <div className="flex flex-col items-center px-12 max-[672px]:px-6 max-[522px]:px-3 border-r-[3px] border-l-[3px] border-gray-500">
+                <h1 className="text-5xl max-[672px]:text-3xl max-[672px]:font-bold font-semibold">
                   {user.followers?.length || 0}
                 </h1>
                 <p className="text-gray-400">Followers</p>
               </div>
               <div className="flex flex-col items-center">
-                <h1 className="text-5xl font-semibold">{views}</h1>
+                <h1 className="text-5xl max-[672px]:text-3xl max-[672px]:font-bold font-semibold">{views}</h1>
                 <p className="text-gray-400">Views</p>
               </div>
             </section>
+            <section className="min-[811px]:hidden flex items-center gap-10">
+              <a href={`${user.github || ""}`} target="_blank">
+                <Image
+                  alt=""
+                  src={github}
+                  className="w-[30px] cursor-pointer"
+                />
+              </a>
+              <a href={`${user.website || ""}`} target="_blank">
+                <Image
+                  alt=""
+                  src={website}
+                  className="w-[30px] cursor-pointer"
+                />
+              </a>
+              <Image alt="" src={share} className="w-[30px] cursor-pointer" />
+            </section>
           </div>
-          <div className="flex flex-col items-center justify-between py-6 px-4 h-[500px] bg-gray-50 shadow-lg rounded-xl">
+          <div className="flex flex-col items-center justify-between py-6 px-4 h-[500px] bg-gray-50 shadow-lg rounded-xl max-[810px]:hidden">
             <Link href="/posts">
               <Image alt="" src={home} className="w-[30px] cursor-pointer" />
             </Link>

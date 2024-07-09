@@ -1,0 +1,44 @@
+/* .ql-container.ql-snow {
+  border: 1px solid #ccc;
+} */
+*{
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.content .ql-container.ql-snow{
+  height: 100%;
+  border: none;
+}
+.content .ql-editor .ql-align-center img{
+  margin: 0 auto;
+}
+.content .ql-editor{
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+.content h1{
+  margin-top: 2px 0;
+}
+
+/* scroll bar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

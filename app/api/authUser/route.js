@@ -14,7 +14,7 @@ export async function GET() {
   const {user} = session
   try {
     await connectToMongodb();
-    const authUser = await User.findOne({_id:user._id}, {_id:false, name:true, username:true, email:true, bio:true, avatar:true, posts:true,followers:true,github:true, website:true}).populate({path:"posts", model: Post}).exec();
+    const authUser = await User.findOne({_id:user._id}, {_id:false, name:true, username:true, email:true, bio:true, avatar:true, posts:true,followers:true,github:true, website:true}).populate({path:"posts", select:"_id views", model: Post}).exec();
     return NextResponse.json({
       authUser,
       ok: true

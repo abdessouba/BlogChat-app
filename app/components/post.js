@@ -9,16 +9,16 @@ const post = ({ post }) => {
   const publishedOn = dateObject.toISOString().split("T")[0];
   return (
     <AnimationWrapper>
-      <a href={`getPost/${post?._id}`}>
-        <div className="flex justify-between w-[800px] transition-all duration-200">
+      <a href={`getPost/${post?._id}`} className="mb-10">
+        <div className="flex justify-between w-full transition-all duration-200 max-[880px]:flex-col max-[880px]:gap-3">
           <section>
             <div className="flex items-center gap-2 mb-3">
-              <Image alt="as" src={`/avatars/${post?.userId.avatar}`} width={32} height={32} className="rounded-full border border-gray-800"/>
+              <Image alt="as" src={`/avatars/${post?.userId.avatar}`} width={32} height={32} className="rounded-full border border-gray-800 max-w-[32px] max-h-[32px]"/>
               <p className="text-sm">posted by @<Link href={`/users/${post?.userId.username}`} className=" text-gray-600 underline">{post?.userId.username}</Link></p>
             </div>
             <div>
-              <h1 className="font-bold text-2xl mb-2">{post?.title}</h1>
-              <p className="max-h-[50px] max-w-[500px] truncate ">{post?.description}</p>
+              <h1 className="font-bold text-2xl mb-2 first-letter:uppercase">{post?.title}</h1>
+              <p className="max-h-[50px] max-w-[500px] max-[880px]:max-w-[200px] truncate font-light">{post?.description}</p>
               <div className="text-sm mt-2 flex items-center gap-1">
                 <p>{publishedOn}</p>
                 <span className="font-bold">.</span>
@@ -29,7 +29,7 @@ const post = ({ post }) => {
             </div>
           </section>
           <section>
-            <Image alt="as" src={`/storage/${post?.image}`} width={250} height={250}/>
+            <Image alt="as" src={`/storage/${post?.image}`} layout="responsive" width={250} height={250} className="min-w-[250px]"/>
           </section>
         </div>
       </a>

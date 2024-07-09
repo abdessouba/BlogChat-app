@@ -34,17 +34,17 @@ const Password = () => {
       });
   };
   return (
-    <form className="mt-10 m-auto" onSubmit={handleFormSubmit}>
+    <form className="mt-10 ml-10 max-sm:mx-4 min-w-[400px] max-[546px]:min-w-full max-sm:w-auto" onSubmit={handleFormSubmit}>
       <Toaster />
       <div className="flex gap-1 items-center mb-5">
         <Image alt="" src={settings} width={40} />
-        <h1 className="text-4xl font-bold">Change Password</h1>
+        <h1 className="text-4xl font-bold max-sm:text-2xl">Change Password</h1>
       </div>
       <div className="relative flex flex-col gap-1">
         <label className="font-semibold">Current password:</label>
         <input
           type={visability.currPass ? "text" : "password"}
-          className="border-2 border-gray-100 rounded-md py-3 px-4 w-[400px] mb-2"
+          className="border-2 border-gray-100 rounded-md py-3 px-4 w-full mb-2"
           name="currPass"
         />
         {!visability.currPass && (
@@ -76,7 +76,7 @@ const Password = () => {
         <label className="font-semibold">New password:</label>
         <input
           type={visability.newPass ? "text" : "password"}
-          className="border-2 border-gray-100 rounded-md py-3 px-4 w-[400px] mb-2"
+          className="border-2 border-gray-100 rounded-md py-3 px-4 w-full mb-2"
           name="newPass"
         />
         {!visability.newPass && (
@@ -108,7 +108,7 @@ const Password = () => {
         <label className="font-semibold">Confirm password:</label>
         <input
           type={visability.confPass ? "text" : "password"}
-          className="border-2 border-gray-100 rounded-md py-3 px-4 w-[400px] mb-2"
+          className="border-2 border-gray-100 rounded-md py-3 px-4 w-full mb-2"
           name="confPass"
         />
         {!visability.confPass && (
@@ -136,7 +136,7 @@ const Password = () => {
           />
         )}
       </div>
-      <button className=" mt-2 bg-gray-800 text-white w-[400px] py-3 px-4 rounded-md cursor-pointer hover:bg-gray-900 transition">
+      <button className=" mt-2 bg-gray-800 text-white w-full py-3 px-4 rounded-md cursor-pointer hover:bg-gray-900 transition">
         Confirm
       </button>
     </form>

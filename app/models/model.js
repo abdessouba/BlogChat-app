@@ -7,6 +7,27 @@ const followSchema = new Schema(
   { timestamps: true }
 );
 
+const notificationSchema = new Schema(
+  {
+    notice: {
+      type: {
+        type: String,
+        enum: ["like", "follow", "comment", "reply", "mention", "post"],
+        required: true,
+      },
+      id: {type: mongoose.Schema.Types.ObjectId,required: true}, // noticeId of reply comment ...
+    },
+    actor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    relatedToId: {type: mongoose.Schema.Types.ObjectId, required: true,} // post or user
+  },
+  { timestamps: true }
+);
+
+
 const userSchema = new Schema(
   {
     name: {
@@ -39,8 +60,17 @@ const userSchema = new Schema(
     ],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
     followers: [followSchema],
-    github: {type: String},
-    website: {type: String},
+    github: { type: String },
+    website: { type: String },
+    notifications: [notificationSchema],
+    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    friendsRequests: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        createdAt: () => new Date().toISOString(),// init with iso date like createdAt of mongoDb
+      },
+    ], 
   },
   { timestamps: true }
 );

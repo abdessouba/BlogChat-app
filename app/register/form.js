@@ -18,9 +18,16 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const bio = ""
+    const bio = "";
     axios
-      .post("api/register", { name, username, email, bio, password, avatar: uploadedImage })
+      .post("api/register", {
+        name,
+        username,
+        email,
+        bio,
+        password,
+        avatar: uploadedImage,
+      })
       .then((res) => {
         if (res.data.ok) {
           toast.success("user created");
@@ -28,8 +35,8 @@ const Form = () => {
         }
       })
       .catch((err) => {
-        console.log(err)
-        toast.error("error creating user try again.")
+        console.log(err);
+        toast.error("error creating user try again.");
       });
   };
 
@@ -56,26 +63,26 @@ const Form = () => {
         ref={imageRef}
         onChange={handleImageUpload}
       />
-      <div className="flex items-center gap-5 w-full">
-          <div
-            className="relative group flex items-center justify-center cursor-pointer"
-            onClick={handleImageClick}
-          >
-            <Image
+      <div className="flex max-md:flex-col items-center gap-5 w-full">
+        <div
+          className="relative group flex items-center justify-center cursor-pointer"
+          onClick={handleImageClick}
+        >
+          <Image
             alt=""
-              src={uploadedImage || image}
-              width={130}
-              height={140}
-              className="rounded-md"
-            />
-            <p className="absolute text-nowrap top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 group-hover:block hidden bg-white/70 py-2 px-4 text-sm font-semibold rounded-full">
-              change image.
-            </p>
-          </div>
-        <div>
+            src={uploadedImage || image}
+            width={130}
+            height={130}
+            className="p-4 max-w-[130px] max-h-[130px] rounded-full"
+          />
+          <p className="absolute text-nowrap top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 group-hover:block hidden bg-white/70 py-2 px-4 text-sm font-semibold rounded-full">
+            change image.
+          </p>
+        </div>
+
+        <div className="w-full">
           <div className="w-full">
             <label
-              htmlFor="email"
               className="block mb-2 text-sm font-medium text-gray-600 "
             >
               Name
@@ -86,7 +93,7 @@ const Form = () => {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-600 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[250px] p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-600 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Jhon"
               required
             />
@@ -94,7 +101,7 @@ const Form = () => {
           <div>
             <label
               htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-600 "
+              className="block mb-2 text-sm font-medium text-gray-600 mt-1"
             >
               Username
             </label>
@@ -104,7 +111,7 @@ const Form = () => {
               id="name"
               value={username}
               onChange={(e) => setUserName(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-600 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-[250px] p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-600 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Smith"
               required
             />

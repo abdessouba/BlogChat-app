@@ -1,15 +1,14 @@
-"use client"
+"use client";
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import initImage from "../../public/images/image.png";
+import initImage from "../../public/images/uimage.png";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import _image from "../../public/images/_image.png";
-
-// Import ReactQuill dynamically in the client-side
-import dynamic from "next/dynamic";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import JoditEditor from "jodit-react";
+import config from "../dependencies/config";
+import { useSearchParams } from "next/navigation";
 
 const Page = () => {
   const textareaRef = useRef(null);
@@ -22,34 +21,58 @@ const Page = () => {
   const [themes, setThemes] = useState([]);
   const [image, setImage] = useState(null);
   const [uploadedImage, setUploadedImage] = useState();
+  const [view, setView] = useState(false);
 
-  const [value, setValue] = useState("");
-  const preRef = useRef("");
-  const edtRef = useRef("");
+  // update
+  const query = useSearchParams();
+  const id = query.get("id");
+  useEffect(() => {
+    if (!id) return;
+    axios
+      .get(`/api/post/${id}`)
+      .then((res) => {
+        const post = res.data.post;
+        setContent(post.content);
+        setThemes(post.themes);
+        setUploadedImage(`/storage/${post.image}`);
+        setTitle(post.title);
+        setTextArea(post.description);
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  }, [id]);
 
-  const toolbarOptions = [
-    ["bold", "italic", "underline", "strike"], // toggled buttons
-    ["blockquote", "code-block"],
-    ["link", "image", "video"],
-
-    [{ header: 1 }, { header: 2 }], // custom button values
-    [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
-    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-    [{ direction: "rtl" }], // text direction
-
-    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
-    [{ header: [1, 2, 3, false] }],
-
-    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-    [{ font: [] }],
-    [{ align: [] }],
-
-    ["clean"], // remove formatting button
-  ];
-
-  const _module = {
-    toolbar: toolbarOptions,
+  const handleUpdate = () => {
+    axios
+      .post("/api/updateUserPost", {
+        postId: id,
+        content,
+        title,
+        uploadedImage,
+        textArea,
+        themes,
+      })
+      .then((res) => {
+        if (res.data.ok) {
+          toast.success(res.data.message);
+        }
+        if (!res.data.ok) {
+          toast.error(res.data.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  const editor = useRef(null);
+  const [content, setContent] = useState("");
+
+  // upload button
+  const [show, setShow] = useState(false);
+  const [link, setLink] = useState("");
+  const file = useRef(null);
 
   const handleClick = () => {
     if (textareaRef.current) {
@@ -67,7 +90,7 @@ const Page = () => {
       setInitChars((prev) => prev - num);
     }
   };
-  
+
   const handleThemeInputVal = (e) => {
     setTheme(e.target.value);
   };
@@ -127,6 +150,7 @@ const Page = () => {
       image: uploadedImage,
       textArea: textArea,
       themes: themes,
+      content,
     };
     axios.post("/api/post", post).then((res) => {
       if (res.data.ok) {
@@ -136,24 +160,45 @@ const Page = () => {
         setTitle("");
         setThemes([]);
         setUploadedImage();
+        setContent("");
+      }
+      if(!res.data.ok){
+        toast.error(res.data.message)
       }
     });
 
     handleUpload();
   };
 
+  const handleOpenImage = () => {
+    file.current.click();
+  };
+
+  const joditUploader = () => {
+    const formData = new FormData();
+    formData.append("image", file.current.files[0]);
+    axios
+      .post("http://localhost:3000/api/upload", formData)
+      .then((res) => {
+        setLink(`http://localhost:3000/storage/${res.data.image}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <div className="w-[1000px] m-auto flex flex-col gap-5 items-center mb-10">
+    <div className="max-w-[1000px] max-lg:w-[80%] max-sm:w-[90%] m-auto flex flex-col gap-5 items-center">
       <Toaster />
       {!uploadedImage && (
-        <section className="flex flex-col gap-1 justify-center items-center border-4 border-gray-200 w-[1000px] h-[600px] cursor-pointer hover:bg-gray-50 transition duration-150">
-          <Image alt="" src={initImage} className="w-[20%]" />
+        <section className="flex flex-col gap-1 justify-center items-center border-4 border-gray-200 w-full h-[600px] max-md:h-[300px] cursor-pointer hover:bg-gray-50 transition duration-150">
+          <Image alt="" src={initImage} className="w-[20%] opacity-75" />
           <p className="text-sm font-semibold text-gray-400">
             Upload your image here.
           </p>
           <button
             onClick={handleUploadClick}
-            className="bg-blue-400 py-3 px-6 rounded-full text-white hover:bg-blue-500 transition mt-2"
+            className="bg-slate-400 text-lg py-2 w-[200px] px-6 rounded-lg text-white hover:bg-blue-300 transition mt-2"
           >
             upload
           </button>
@@ -168,7 +213,7 @@ const Page = () => {
         onChange={handleImageUpload}
       />
       {uploadedImage && (
-        <section className="group relative border-4 border-gray-100 p-[3px]">
+        <section className="group relative border-4 max-sm:border-none border-gray-100 p-[3px]">
           <Image alt="" src={uploadedImage} width={1200} height={600} />
           <button
             onClick={handleUploadClick}
@@ -188,7 +233,7 @@ const Page = () => {
           className="w-full border-b-4 border-gray-200 text-2xl py-2 outline-none focus:border-gray-400 capitalize"
         />
         <div className="w-full flex flex-col gap-3 mt-2 text-gray-500">
-          <label className="font-semibold text-2xl italic">
+          <label className="font-semibold text-3xl italic max-sm:text-2xl">
             Short description about your article:
           </label>
           <textarea
@@ -205,21 +250,41 @@ const Page = () => {
           </p>
         </div>
         <div className="w-full flex flex-col gap-3 mt-2 text-gray-500">
-          <label className="font-semibold text-2xl italic">
+          <label className="font-semibold text-3xl italic">
             Article Main Content:
           </label>
           <div className="w-full">
-            <ReactQuill
-              modules={_module}
-              ref={edtRef}
-              theme="snow"
-              value={value}
-              onChange={setValue}
+            <JoditEditor
+              className="editor"
+              ref={editor}
+              value={content}
+              config={config}
+              tabIndex={1} // tabIndex of textarea
+              onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+              // onChange={newContent => {setContent(newContent)}}
             />
+            <div className="flex items-center gap-4">
+              <button
+                onClick={handleOpenImage}
+                className="border-2 border-blue-300 font-semibold py-3 px-6 rounded-md mt-1"
+              >
+                upload
+              </button>
+              {link && (
+                <input
+                  onClick={(e) => e.target.select()}
+                  type="text"
+                  readOnly
+                  value={link}
+                  className="w-full py-3 outline-none border-b-2 border-gray-300"
+                />
+              )}
+              <input type="file" onChange={joditUploader} hidden ref={file} />
+            </div>
           </div>
         </div>
       </section>
-      <section className="w-full">
+      <section className="w-full z-10">
         <h1 className="italic font-semibold text-2xl text-gray-500 mb-3">
           Themes
         </h1>
@@ -261,12 +326,22 @@ const Page = () => {
           </ul>
         </div>
       </section>
-      <input
-        type="submit"
-        value="Submit"
-        onClick={handleSubmit}
-        className="bg-gray-800 py-3 px-6 text-white rounded-md text-lg cursor-pointer active:scale-95 transition-all duration-300"
-      />
+      {!id && (
+        <input
+          type="submit"
+          value="Submit"
+          onClick={handleSubmit}
+          className="bg-gray-800 py-3 px-6 text-white rounded-md text-lg cursor-pointer active:scale-95 transition-all duration-300 mb-10"
+        />
+      )}
+      {id && (
+        <input
+          type="submit"
+          value="Update"
+          onClick={handleUpdate}
+          className="bg-gray-800 py-3 px-6 text-white rounded-md text-lg cursor-pointer active:scale-95 transition-all duration-300 mb-10"
+        />
+      )}
     </div>
   );
 };

@@ -1,0 +1,13 @@
+
+.editor{
+    border: none;
+    width: 1000px !important;
+}
+
+.test{
+    padding: 15px !important;
+}
+
+img {
+    cursor: pointer !important;
+}
