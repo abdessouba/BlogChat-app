@@ -45,7 +45,7 @@ It is a website for bloging (publishing posts) and chating with users to change 
 ![Screenshot 2024-07-09 121043](https://github.com/abdessouba/BlogChat-app/assets/160285551/6b73a302-88b6-4657-8420-739cbb97cc77)
 
 
-## 4- User Page
+## 4- Users Page
 ![Screenshot 2024-07-09 123412](https://github.com/abdessouba/BlogChat-app/assets/160285551/8fb28748-31c6-4461-8bc1-8e8c0f8fe285)
 
 
